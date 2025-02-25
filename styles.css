@@ -1,0 +1,1020 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Montserrat:wght@300;400;500&display=swap');
+
+:root {
+    --primary-color: #FF7B54; /* Orange chaud */
+    --secondary-color: #FFB26B; /* Orange doux */
+    --accent-color: #FFD56F; /* Jaune doré */
+    --text-color: #2C3639; /* Gris foncé */
+    --background-light: #FFF1E6; /* Beige clair */
+    --background-dark: #939B62; /* Vert olive */
+    --sunset-gradient: linear-gradient(135deg, #FF7B54, #FFB26B, #FFD56F);
+    --text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+    --transition: all 0.3s ease;
+    --hex-gap-horizontal: 40px;  /* Doublé (était 20px) */
+    --hex-gap-vertical: 60px;    /* Doublé (était 30px) */
+    --hex-width: 173.2px;        /* Doublé (était 86.6px) */
+    --hex-height: 200px;         /* Doublé (était 100px) */
+    --inverse-gradient: linear-gradient(315deg, #FFD56F, #FFB26B, #FF7B54); /* Gradient inversé à 315deg */
+    --hex-color-1: rgba(255, 123, 84, 0.3); /* Orange chaud transparent */
+    --hex-color-2: rgba(255, 178, 107, 0.3); /* Orange doux transparent */
+    --hex-color-3: rgba(255, 213, 111, 0.3); /* Jaune doré transparent */
+}
+
+/* Base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.8;
+    background-color: var(--background-light);
+    color: var(--text-color);
+}
+
+h1, h2, h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 700;
+}
+
+/* Header & Navigation */
+header {
+    background-color: rgba(255, 241, 230, 0.9);
+    padding: 0.8rem 2rem;
+    position: fixed;
+    width: auto;  /* Changé de 90% à auto */
+    min-width: min-content; /* Ajout d'une largeur minimum */
+    top: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1000;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    backdrop-filter: blur(8px);
+    border-radius: 30px;
+    transition: all 0.3s ease;
+}
+
+header:hover {
+    background-color: rgba(255, 255, 255, 0.95);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 2rem; /* Réduit de 3rem à 2rem pour un look plus compact */
+    padding: 0.3rem 1rem; /* Ajout d'un padding horizontal minimum */
+    white-space: nowrap; /* Empêche le retour à la ligne du texte */
+}
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 500;
+    position: relative;
+    padding: 0.5rem 1.2rem;
+    transition: var(--transition);
+    letter-spacing: 0.5px;
+}
+
+nav ul li a:hover {
+    color: var(--accent-color);
+}
+
+/* Mise à jour du style de survol des liens */
+nav ul li a::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--accent-color);
+    transition: var(--transition);
+    transform: translateX(-50%);
+}
+
+nav ul li a:hover::after {
+    width: 80%;
+}
+
+/* Hero Section */
+.hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 4rem 2rem;
+    position: relative;
+    overflow: hidden;
+    background: var(--sunset-gradient);
+}
+
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    z-index: -1;
+}
+
+.hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4.5rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: white;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 1s ease forwards;
+    letter-spacing: 2px;
+    text-shadow: var(--text-shadow);
+    position: relative;
+    z-index: 2;
+}
+
+/* Supprimer ou commenter cette partie */
+/*.hero-decoration {
+    color: var(--accent-color);
+    font-size: 3rem;
+    margin-top: 1rem;
+    animation: softFloat 3s infinite ease-in-out;
+}*/
+
+.scroll-indicator {
+    position: absolute;
+    bottom: 20px;
+    font-size: 2rem;
+    color: white;
+    animation: bounce 2s infinite;
+}
+
+.hexagon-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    overflow: hidden;
+    background: var(--sunset-gradient);
+}
+
+.hexagon-grid {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    /* Utilisation de calc pour définir l'espacement vertical entre les lignes */
+    gap: calc(var(--hex-height) * 0.25 - var(--hex-gap-vertical));
+    /* Ajout du gradient inverse sur la grille entière */
+    background: var(--inverse-gradient);
+}
+
+.hexagon-row {
+    display: flex;
+    /* Utilisation de la variable pour l'espacement horizontal */
+    gap: var(--hex-gap-horizontal);
+    margin-left: 0;
+    opacity: 0;
+    animation: rowFadeIn 0.5s ease forwards;
+}
+
+.hexagon-row:nth-child(even) {
+    /* Calcul du décalage basé sur la largeur de l'hexagone et l'espacement horizontal */
+    margin-left: calc((var(--hex-width) + var(--hex-gap-horizontal)) / 2);
+}
+
+.hexagon {
+    width: var(--hex-width);
+    height: var(--hex-height);
+    background: var(--hex-color-2);
+    clip-path: polygon(
+        50% 0%,
+        100% 25%,
+        100% 75%,
+        50% 100%,
+        0% 75%,
+        0% 25%
+    );
+    position: relative;
+    opacity: 0;
+    animation: hexFadeIn 0.3s ease forwards;
+    transition: transform 0.3s ease, background-color 0.3s ease;
+    z-index: 1;
+}
+
+.hexagon::before {
+    content: '';
+    position: absolute;
+    inset: 1px;
+    background: linear-gradient(
+        45deg,
+        var(--hex-color-1),
+        var(--hex-color-2),
+        var(--hex-color-3)
+    );
+    clip-path: inherit;
+    transition: all 0.3s ease;
+    opacity: 0.8;
+}
+
+/* Variation des couleurs par ligne */
+.hexagon-row:nth-child(3n) .hexagon::before {
+    background: linear-gradient(
+        45deg,
+        var(--hex-color-2),
+        var(--hex-color-3),
+        var(--hex-color-1)
+    );
+}
+
+.hexagon-row:nth-child(3n+2) .hexagon::before {
+    background: linear-gradient(
+        45deg,
+        var(--hex-color-3),
+        var(--hex-color-1),
+        var(--hex-color-2)
+    );
+}
+
+/* Simplification de l'effet de survol */
+.hexagon:hover {
+    transform: scale(1.1);
+    z-index: 2;
+}
+
+.hexagon:hover::before {
+    opacity: 1;
+    filter: brightness(1.2);
+}
+
+/* About Section */
+.about-section {
+    padding: 4rem 2rem;
+    background-color: white;
+}
+
+.presentation {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 2rem auto;
+    align-items: center;
+}
+
+.photo-container {
+    flex: 1;
+}
+
+.photo-placeholder {
+    width: 300px;
+    height: 300px;
+    background-color: #eee;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.photo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.about-text {
+    flex: 2;
+}
+
+.about-text h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.about-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Site Purpose Section */
+.site-purpose {
+    padding: 4rem 2rem;
+    background-color: var(--background-light);
+}
+
+.purpose-content {
+    display: flex;
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    align-items: center;
+}
+
+.purpose-content img {
+    width: 50%;
+    border-radius: 12px;
+}
+
+.purpose-content p {
+    flex: 1;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+/* Poems Grid - Mise à jour avec limite de colonnes */
+.poems-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* Force 3 colonnes sur desktop */
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+/* Ajustements responsive pour la grille de poèmes */
+@media (max-width: 1200px) {
+    .poems-grid {
+        grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+        gap: 1.5rem;
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .poems-grid {
+        grid-template-columns: 1fr; /* 1 colonne sur mobile */
+        gap: 1rem;
+        padding: 1rem;
+    }
+}
+
+/* Amélioration des cartes de poèmes */
+.poem-card {
+    position: relative;
+    width: 100%;
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    border-left: 4px solid var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.poem-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid rgba(255, 123, 84, 0.2);
+}
+
+.poem-header h3 {
+    font-size: 1.8rem;
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 1.2;
+}
+
+.poem-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    opacity: 0.8;
+}
+
+.poem-theme, .poem-date {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+.poem-theme i, .poem-date i {
+    font-size: 0.8rem;
+    color: var(--primary-color);
+}
+
+.poem-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-color);
+}
+
+.poem-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Sorting Buttons */
+.sorting-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.sorting-buttons button {
+    background: var(--background-light);
+    color: var(--primary-color);
+    border: 2px solid var(--primary-color);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    cursor: pointer;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+sorting-buttons button:hover {
+    background: var(--primary-color);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Admin Panel */
+.admin-login, .admin-panel {
+    max-width: 600px;
+    margin: 100px auto;
+    padding: 2rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Forms */
+form {
+    display: flex;
+    flex-direction: column;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border: 2px solid #eee;
+    border-radius: 8px;
+    transition: var(--transition);
+    font-family: 'Raleway', sans-serif;
+}
+
+input:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+footer {
+    background: var(--text-color);
+    color: var(--background-light);
+    text-align: center;
+    padding: 1rem;
+}
+
+.footer-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.social-links a {
+    color: white;
+    margin-left: 1rem;
+    font-size: 1.5rem;
+    transition: var(--transition);
+}
+
+social-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-10px);
+    }
+    60% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+/* Ajout de la nouvelle animation pour les lignes */
+@keyframes rowFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes hexFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Latest Poem Section */
+.latest-poem {
+    padding: 4rem 2rem;
+    background: linear-gradient(45deg, var(--background-light), #fff);
+}
+
+.latest-poem h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
+
+.poem-preview {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    border-left: 4px solid var(--secondary-color);
+}
+
+.poem-preview h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.poem-preview p {
+    font-size: 1.2rem;
+    line-height: 2;
+    margin-bottom: 1rem;
+    white-space: pre-line; /* Respecter les sauts de ligne */
+    color: var(--text-color);
+    text-align: left;
+    padding: 1rem 0;
+}
+
+.poem-preview a {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--accent-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+poem-preview a:hover {
+    background-color: var(--primary-color);
+}
+
+/* Admin Panel Improvements */
+.poems-admin-list {
+    margin-top: 2rem;
+}
+
+.poem-item {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    margin-bottom: 1.5rem;
+}
+
+.poem-content {
+    margin-bottom: 1rem;
+}
+
+.poem-text {
+    white-space: pre-line;
+    margin: 1rem 0;
+    font-size: 1.1rem;
+    line-height: 1.8;
+}
+
+.poem-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #eee;
+}
+
+.edit-btn, .delete-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.edit-btn {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.delete-btn {
+    background-color: #ff6b6b;
+    color: white;
+}
+
+#cancel-btn {
+    background-color: #666;
+    margin-top: 0.5rem;
+}
+
+#cancel-btn:hover {
+    background-color: #555;
+}
+
+.hidden {
+    display: none;
+}
+
+/* Poems Page Specific Styles */
+.poems-hero {
+    background: var(--sunset-gradient);
+    padding: 8rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    min-height: 50vh;
+    padding-bottom: 8rem; /* Augmenter l'espace pour la barre de recherche */
+}
+
+.poems-hero h1 {
+    color: white;
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+    text-shadow: var(--text-shadow);
+    position: relative;
+    z-index: 2;
+}
+
+/* Suppression des styles liés aux hexagones dans la page poèmes */
+
+.filter-container, .filter-btn {
+    display: none;
+}
+
+.poems-container {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    background: var(--background-light);
+    perspective: 1000px;
+}
+
+/* Search Bar Styles - Version raffinée */
+.search-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    position: sticky;
+    top: 2rem;
+    z-index: 100;
+    position: absolute;
+    left: 50%;
+    bottom: 2rem;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    z-index: 100;
+    transition: transform 0.3s ease;
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    opacity: 1;
+    transition: all 0.3s ease;
+}
+
+/* Ajout d'une classe pour le mode flottant */
+.search-container.sticky {
+    position: fixed;
+    top: 4.5rem; /* Augmenté pour laisser de la place au titre */
+    bottom: auto;
+}
+
+.search-container.sticky.visible {
+    opacity: 1;
+    transform: translateX(-50%);
+}
+
+.search-container:not(.visible) {
+    opacity: 0;
+    transform: translateX(-50%) translateY(10px);
+}
+
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    /* Remplacer le fond transparent par un fond solide */
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    padding: 0.5rem;
+    border: 1px solid rgba(255, 123, 84, 0.1);
+    transition: all 0.3s ease;
+    /* Supprimer backdrop-filter qui cause le flou */
+}
+
+.search-wrapper:focus-within {
+    background: white;
+    box-shadow: 0 8px 30px rgba(255, 123, 84, 0.2);
+    transform: translateY(-1px) scale(1.01);
+}
+
+.search-icon {
+    color: var(--primary-color);
+    font-size: 1rem;
+    padding: 0 1rem;
+    opacity: 0.8;
+}
+
+#search-poems {
+    flex: 1;
+    padding: 0.8rem 0.5rem;
+    border: none;
+    font-size: 1rem;
+    background: none;
+    color: var(--text-color);
+}
+
+#search-poems:focus {
+    outline: none;
+}
+
+.search-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.5rem 1rem;
+    margin-left: 0.5rem;
+    border-left: 2px solid rgba(255, 123, 84, 0.15);
+    height: 100%;
+}
+
+.search-nav button {
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    padding: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.search-nav button:hover:not(:disabled) {
+    opacity: 1;
+    background: rgba(255, 123, 84, 0.1);
+    transform: translateY(-1px);
+}
+
+.search-nav button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+}
+
+.result-count {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-width: 3rem;
+    text-align: center;
+    padding: 0.3rem 0.5rem;
+    background: rgba(255, 123, 84, 0.1);
+    border-radius: 12px;
+}
+
+/* Styles de surbrillance des résultats de recherche */
+.highlight {
+    background-color: rgba(255, 178, 107, 0.15);
+    border-radius: 3px;
+    padding: 0.1em 0.2em;
+    margin: 0 -0.2em;
+    transition: all 0.2s ease;
+}
+
+.highlight.current {
+    background-color: rgba(255, 123, 84, 0.3);
+    box-shadow: 0 1px 8px rgba(255, 123, 84, 0.2);
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.highlight:not(.current):hover {
+    background-color: rgba(255, 178, 107, 0.25);
+}
+
+/* Animation d'entrée pour la barre de recherche */
+@keyframes searchBarFloat {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-container.floating {
+    animation: searchBarFloat 0.3s ease forwards;
+}
+
+/* Search Bar Styles - Version unique et épurée */
+.search-container {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.search-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background: white;
+    border-radius: 25px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.search-icon {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    padding: 0 1rem;
+    opacity: 0.7;
+}
+
+#search-poems {
+    flex: 1;
+    padding: 0.8rem;
+    border: none;
+    font-size: 0.9rem;
+    background: none;
+}
+
+/* Définition unique de .search-nav */
+.search-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1rem;
+    border-left: 1px solid rgba(255, 123, 84, 0.2);
+    height: 100%;
+    margin-left: auto;
+}
+
+.search-nav button {
+    color: var(--primary-color);
+    background: none;
+    border: none;
+    padding: 0.4rem;
+    font-size: 0.9rem;
+    cursor: pointer;
+    opacity: 0.7;
+    display: flex;
+    align-items: center;
+    transition: var(--transition);
+}
+
+.result-count {
+    color: var(--primary-color);
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-width: 2.5rem;
+    text-align: center;
+}
+
+/* Header de navigation repositionné pour la page poèmes */
+.poems-page header {
+    left: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: auto;
+}
+
+.poems-page nav ul {
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.poems-page nav ul li a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+}
+
+/* Ajustement responsive pour le header */
+@media (max-width: 1024px) {
+    .poems-page header {
+        left: 50%;
+        top: 1rem;
+        transform: translateX(-50%);
+    }
+
+    .poems-page nav ul {
+        flex-direction: row;
+        gap: 2rem;
+    }
+}
+
+/* Modification du style pour le titre flottant */
+.floating-header {
+    position: fixed;
+    top: 0.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 99;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-family: 'Cormorant Garamond', serif;
+    background: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.floating-header.visible {
+    opacity: 1;
+    top: 1rem;
+}
+
+.floating-header, .search-container.sticky {
+    transition: all 0.3s ease;
+}

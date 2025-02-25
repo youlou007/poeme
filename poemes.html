@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poèmes - Mon Univers Poétique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loading.css">
+    <script src="config.js"></script>
+    <script src="errorHandler.js"></script>
+    <script src="poemes.js" defer></script>
+</head>
+<body class="poems-page">
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="poemes.html">Poèmes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="poems-hero">
+            <h1>Collection de Poèmes</h1>
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="search-poems" placeholder="Tu cherches quelque chose 🤨?" autocomplete="off">
+                    <div class="search-nav">
+                        <button class="prev-result" title="Précédent">
+                            <i class="fas fa-chevron-up"></i>
+                        </button>
+                        <span class="result-count">0/0</span>
+                        <button class="next-result" title="Suivant">
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="poems-container">
+            <div class="poems-grid" id="poems-container">
+                <!-- Les poèmes seront injectés ici -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Univers Poétique</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

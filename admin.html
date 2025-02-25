@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administration</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="loading.css">
+    <script src="config.js" defer></script>
+    <script src="errorHandler.js" defer></script>
+    <script src="admin.js" defer></script>
+</head>
+<body>
+    <div id="login-screen" class="admin-login">
+        <h2>Connexion Administration</h2>
+        <form id="login-form">
+            <input type="password" id="admin-password" placeholder="Mot de passe" required>
+            <button type="submit">Se connecter</button>
+        </form>
+    </div>
+
+    <div id="admin-panel" class="admin-panel hidden">
+        <h2>Gestion des Poèmes</h2>
+        <form id="poem-form">
+            <input type="hidden" id="poem-id">
+            <input type="text" id="poem-title" placeholder="Titre du poème" required>
+            <textarea id="poem-content" placeholder="Contenu du poème" required></textarea>
+            <select id="poem-genre" required>
+                <option value="">Sélectionner un genre</option>
+                <option value="Libre">Vers libre</option>
+                <option value="Sonnet">Sonnet</option>
+                <option value="Haiku">Haïku</option>
+                <option value="Autre">Autre</option>
+            </select>
+            <input type="text" id="poem-theme" placeholder="Thème">
+            <button type="submit" id="submit-btn">Ajouter un poème</button>
+            <button type="button" id="cancel-btn" class="hidden">Annuler</button>
+            <div class="form-feedback hidden">
+                <!-- Les messages de validation apparaîtront ici -->
+            </div>
+        </form>
+        
+        <div id="poems-list" class="poems-admin-list">
+            <!-- Liste des poèmes existants -->
+        </div>
+    </div>
+</body>
+</html>
