@@ -1,7 +1,7 @@
 const CONFIG = {
     // GitHub Configuration
     GITHUB: {
-        TOKEN: '', // ⚠️ Cette clé doit être régénérée
+        TOKEN: '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', // ⚠️ Cette clé doit être régénérée
         OWNER: 'youlou007',
         REPO: 'poeme',
         FILE_PATH: 'data/poems.json',
