@@ -64,6 +64,7 @@ document.getElementById('poem-form').addEventListener('submit', function(e) {
         titre: document.getElementById('poem-title').value,
         contenu: document.getElementById('poem-content').value,
         theme: document.getElementById('poem-theme').value,
+        genre: document.getElementById('poem-genre').value, // Ajout du genre
         date: poemId ? poemeEnEdition.date : new Date().toISOString()
     };
     
