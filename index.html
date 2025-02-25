@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mon Univers Poétique</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="index.html">Accueil</a></li>
+                <li><a href="poemes.html">Poèmes</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hexagon-background">
+                <div class="hexagon-grid">
+                    <script>
+                        // Génération dynamique des hexagones
+                        document.addEventListener('DOMContentLoaded', function() {
+                            const grid = document.querySelector('.hexagon-grid');
+                            const hexWidth = 86.6; // Largeur d'un hexagone
+                            const hexHeight = 100; // Hauteur d'un hexagone
+                            const hexGap = 12; // Espacement horizontal
+                            const verticalGap = -12; // Espacement vertical (négatif pour le chevauchement)
+                            const lineDelay = 0.1; // Réduit à 0.1 seconde entre les lignes
+                            const hexDelay = 0.08; // Augmenté à 0.08 seconde entre les hexagones
+                            
+                            // Calcul du nombre de colonnes pour couvrir la largeur
+                            const screenWidth = window.innerWidth;
+                            const cols = Math.ceil(screenWidth / (hexWidth + hexGap)) + 2;
+                            
+                            // Calcul du nombre de lignes pour couvrir la hauteur
+                            const screenHeight = window.innerHeight;
+                            const rows = Math.ceil(screenHeight / (hexHeight + verticalGap)) + 2;
+                            
+                            for (let i = 0; i < rows; i++) {
+                                const row = document.createElement('div');
+                                row.className = 'hexagon-row';
+                                row.style.animationDelay = `${i * lineDelay}s`; // Ajout du délai d'animation pour chaque ligne
+                                
+                                for (let j = 0; j < cols; j++) {
+                                    const hex = document.createElement('div');
+                                    hex.className = 'hexagon';
+                                    // Calculer le délai total : délai de la ligne + délai de l'hexagone
+                                    const totalDelay = (i * lineDelay) + (j * hexDelay);
+                                    hex.style.animationDelay = `${totalDelay}s`;
+                                    row.appendChild(hex);
+                                }
+                                
+                                grid.appendChild(row);
+                            }
+                            
+                            // Mise à jour lors du redimensionnement
+                            window.addEventListener('resize', () => {
+                                const newCols = Math.ceil(window.innerWidth / (hexWidth + hexGap)) + 2;
+                                const newRows = Math.ceil(window.innerHeight / (hexHeight + verticalGap)) + 2;
+                                if (newCols !== cols || newRows !== rows) {
+                                    location.reload();
+                                }
+                            });
+                        });
+                    </script>
+                </div>
+            </div>
+            <div class="hero-content">
+                <h1>C'est tipar</h1>
+            </div>
+            <div class="scroll-indicator">
+                <i class="fas fa-chevron-down"></i>
+            </div>
+        </section>
+
+        <section class="latest-poem">
+            <div class="container">
+                <h2>Preview</h2>
+                <div id="latest-poem-content"></div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <p>&copy; 2024 Univers Poétique</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="latest-poem.js"></script>
+    <script src="hexagon-control.js"></script>
+</body>
+</html>
