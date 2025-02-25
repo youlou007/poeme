@@ -93,6 +93,9 @@ const VALIDATION_RULES = {
     }
 };
 
+// Définir les genres valides en constante
+const VALID_GENRES = ["", "Libre", "Sonnet", "Haiku", "Autre"];
+
 function validatePoeme(poeme) {
     const errors = [];
     
@@ -133,8 +136,8 @@ function validatePoeme(poeme) {
         errors.push("La date n'est pas valide");
     }
 
-    // Validation du genre
-    if (!poeme.genre || !["Libre", "Sonnet", "Haiku", "Autre"].includes(poeme.genre)) {
+    // Correction de la validation du genre
+    if (!VALID_GENRES.includes(poeme.genre)) {
         errors.push("Le genre sélectionné n'est pas valide");
     }
 
